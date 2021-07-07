@@ -8,9 +8,25 @@
 //   bad: 0
 // }
 
+// Шаг 2
+// Расширь функционал приложения так, чтобы в интерфейсе отображалось больше статистики о собранных отзывах.
+// Добавь отображение общего количества собранных отзывов из всех категорий и процент положительных отзывов. 
+// Для этого создай вспомогательные методы countTotalFeedback() и countPositiveFeedbackPercentage(), 
+// подсчитывающие эти значения основываясь на данных в состоянии (вычисляемые данные).
+
+// Шаг 3
+// Выполни рефакторинг приложения. Состояние приложения должно оставаться в корневом компоненте <App>.
+
+// Вынеси отображение статистики в отдельный компонент <Statistics good={} neutral={} bad={} total={} 
+// positivePercentage={}>.
+// Вынеси блок кнопок в компонент <FeedbackOptions options={} onLeaveFeedback={}>.
+// Создай компонент <Section title="">, который рендерит секцию с заголовком и детей (children). 
+// Оберни каждый из <Statistics> и <FeedbackOptions> в созданный компонент секции.
+
 
 import React from 'react';
-import './Statistics.css';
+//import './Statistics/Stat';
+import './Statistics/Statistics.css';
 
 class Statistics extends React.Component {
     state = {
@@ -37,27 +53,54 @@ class Statistics extends React.Component {
         }))
     };
 
+    countTotalFeedback = () => {
+        const total = this.state.valueGood + this.state.valueNeutral + this.state.valueBad;
+        return total;   
+    };
+
+    countPositiveFeedbackPercentage = () => {
+        const positiveFeedbackPercent = Math.round(100/this.countTotalFeedback()*this.state.valueGood);
+        return positiveFeedbackPercent;
+    }
+
     render () {
+        const totalFeedback = this.countTotalFeedback();
+        const positiveFeedbackPercentage = this.countPositiveFeedbackPercentage();
+
+
         return (
+
     <div className="Container">
+        <h1> Please leave us feedback</h1>
         <div className="Statistics__btn">
-            <button type="button" onClick={this.handleGood}>Good</button>
-            <button type="button" onClick={this.handleNeutral}>Neutral</button>
-            <button type="button" onClick={this.handleBad}>Bad</button>
+            <button className="positive__btn" type="button" onClick={this.handleGood}>Good</button>
+            <button className="neutral__btn" type="button" onClick={this.handleNeutral}>Neutral</button>
+            <button className="bad__btn" type="button" onClick={this.handleBad}>Bad</button>
+        </div>
+
+     {/* <Stat 
+     onGood = {this.state.valueGood}
+     onNeutral = {this.state.valueNeutral}
+     onBad = {this.state.valueBad}
+     onTotalFeedback = {totalFeedback}
+     onPositivePercentage = {positiveFeedbackPercentage}
+     /> */}
+
+        <div>
+            <h3 className="Statistics__title">Statistics</h3>
         </div>
         <div>
             <ul>
-                <li>
-                    <span>Good:{this.state.valueGood} </span>
-                 </li>
+                <li>Good:{this.state.valueGood}</li>
                  
-                 <li>
-                    <span>Neutral:{this.state.valueNeutral} </span>
-                 </li>
+                 <li>Neutral:{this.state.valueNeutral} </li>
 
-                 <li>
-                    <span>Bad:{this.state.valueBad}</span>
-                </li>
+                 <li>Bad:{this.state.valueBad}</li>
+
+                 <li>Total:{totalFeedback}</li>
+
+                 <li>Positive feedback:{positiveFeedbackPercentage}%</li>
+
             </ul>
         </div>
      
@@ -65,7 +108,5 @@ class Statistics extends React.Component {
         )
     }
 }
-
-
 
 export default Statistics;
