@@ -8,7 +8,6 @@ const FeedbackOptions = ({options, onLeaveFeedback}) => (
     <div>
     {options.map((option) => (
         <button
-            
             key={shortid.generate()}
             type="button"
             name={option}
