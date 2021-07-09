@@ -16,8 +16,8 @@ state = {
         bad: 0,
     };
 
-    onLeaveFeedback = (e) => {
-        const value = e.target.value;
+    onLeaveFeedback = (value) => {
+        //const value = e.target.value;
         this.setState(prevState => ({[value]: prevState[value] + 1}));
     };
 
@@ -40,12 +40,12 @@ state = {
     // };
 
     countTotalFeedback = () => {
-        const total = this.state.valueGood + this.state.valueNeutral + this.state.valueBad;
+        const total = this.state.good + this.state.neutral + this.state.bad;
         return total;   
     };
 
     countPositiveFeedbackPercentage = () => {
-        const positiveFeedbackPercent = Math.round(100/this.countTotalFeedback()*this.state.valueGood);
+        const positiveFeedbackPercent = Math.round(100/this.countTotalFeedback()*this.state.good);
         return positiveFeedbackPercent;
     }
 
