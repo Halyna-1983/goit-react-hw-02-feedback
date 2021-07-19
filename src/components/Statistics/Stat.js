@@ -5,7 +5,7 @@ import './Statistics.css';
 
 const Statistics = ({good, neutral, bad, total, positive}) => (
     
-         <div className="Statistics__title">
+    <div className="Statistics__title">
     
         <ul>
             <li>Good: {good} </li>

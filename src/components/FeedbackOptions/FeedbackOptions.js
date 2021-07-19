@@ -11,13 +11,12 @@ const FeedbackOptions = ({options, onLeaveFeedback}) => (
             key={shortid.generate()}
             type="button"
             name={option}
-            onClick={()=> onLeaveFeedback(option)}
-        >
+            onClick={()=> onLeaveFeedback(option)}>
             {option}
         </button>
     ))}
     
-</div>
+    </div>
 );
 
 FeedbackOptions.propTypes = {

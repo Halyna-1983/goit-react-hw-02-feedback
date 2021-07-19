@@ -9,17 +9,6 @@ const Section = ({ title, children }) => (
 	</div>
 );
 
-// render() {
-// 	const {title, children} = this.props;
-
-// 	return (
-// 		<Section>
-// <h1>{title}</h1>
-// ()
-// 		</Section>
-// 	)
-// }
- 
 Section.propTypes = {
 	title: PropTypes.string.isRequired,
 	children: PropTypes.node,
